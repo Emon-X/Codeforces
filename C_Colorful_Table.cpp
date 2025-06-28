@@ -19,26 +19,23 @@ void domain_expension()
     for (int i = 1; i <= n; i++)
         cin >> a[i];
 
-    vector<ll> first(k + 1, -1), last(k + 1, -1);
-    for (int i = 1; i <= n; i++) {
-        if (first[a[i]] == -1) first[a[i]] = i;
-        last[a[i]] = i;
+    vector<ll> min_pos(k + 2, INT_MAX), max_pos(k + 2, INT_MIN), has(k + 2, 0);
+    for (ll i = 1; i <= n; i++) {
+        min_pos[a[i]] = min(min_pos[a[i]], i);
+        max_pos[a[i]] = max(max_pos[a[i]], i);
+        has[a[i]] = 1;
     }
-    for (int color = 1; color <= k; color++) {
-        if (first[color] == -1) {
+
+    for (ll c = k; c >= 1; c--) {
+        min_pos[c] = min(min_pos[c], min_pos[c + 1]);
+        max_pos[c] = max(max_pos[c], max_pos[c + 1]);
+    }
+    for (ll c = 1; c <= k; c++) {
+        if (!has[c]) {
             cout << 0 << " ";
-            continue;
+        } else {
+            cout << 2 * (max_pos[c] - min_pos[c] + 1) << " ";
         }
-        // Find the farthest distance between any two positions where a[i] >= color
-        int min_pos = -1, max_pos = -1;
-        for (int i = 1; i <= n; i++) {
-            if (a[i] >= color) {
-                if (min_pos == -1) min_pos = i;
-                max_pos = i;
-            }
-        }
-        ll width = max_pos - min_pos + 1;
-        cout << width * 2 << " ";
     }
     cout << endl;
 }

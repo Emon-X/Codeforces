@@ -39,9 +39,6 @@ void domain_expension()
         }
         if (i % 2 == 1)
         {
-            // for b[i] and a[i]
-            // if(mae[a[i]] || mbo[a[i]] || mao[a[i]] || mbe[a[i]]-1>i)break;
-            // if(mbe[b[i]] || mao[b[i]] || mbo[b[i]] || mae[b[i]]-1>i)break;
             if (even_a[a[i]] > 0 or odd_b[a[i]] > 0 or odd_a[a[i]] or even_b[a[i]] > (i + 1))
             {
                 ans = max(ans, i);
