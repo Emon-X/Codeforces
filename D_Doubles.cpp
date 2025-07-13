@@ -43,7 +43,7 @@ void domain_expension()
                     sum += (f / (double)g[i].size() * f1 / (double)g[j].size());
                 }
             }
-            ans = max (ans,sum);
+            ans = max(ans, sum);
         }
     }
     cout << setprecision(15) << ans << endl;
